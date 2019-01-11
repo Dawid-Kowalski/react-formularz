@@ -1,3 +1,12 @@
+class NewContact {
+  	constructor(id, firstName, lastName, email) {
+	    this.id = id;
+	    this.firstName=firstName;
+	    this.lastName = lastName;
+	    this.email = email;
+  	}
+}
+
 class Title extends React.Component {
 
 	render() {
@@ -13,28 +22,23 @@ class ContactForm extends React.Component {
 
 	state = {
 		contacts: this.props.contacts,
-		newContact: {
-			id: '',
-			firstName: '',
-			lastName: '',
-			email: ''
-		},
+		newId: 3,
 		newFirstName: '',
 		newLastName: '',
 		newEmail: ''
 	}
 
-	test = () => {
-		this.state.newContact.id = 0;
-		this.state.newContact.firstName = this.state.newFirstName;
-		this.state.newContact.lastName = this.state.newLastName;
-		this.state.newContact.email = this.state.newEmail;
+	test = event => {
+		event.preventDefault();
+		this.state.newId++;
 
-		alert(this.state.newContact.firstName + " " + this.state.newContact.lastName + " " + " " + this.state.newContact.email)
-
-		const newContactList = this.state.contacts;
-		newContactList.push(this.state.newContact);
+		let newContactList = this.state.contacts;
+		let newContact = new NewContact(this.state.newId, this.state.newFirstName, this.state.newLastName, this.state.newEmail);
+		newContactList.push(newContact);
 		this.setState({contacts: newContactList});
+		this.setState({newFirstName: ''});
+		this.setState({newLastName: ''});
+		this.setState({newEmail: ''});
 	}
 
 	changeFirstNameValue = event => {
@@ -56,7 +60,7 @@ class ContactForm extends React.Component {
 					<label>Imie</label>
 					<input type="text" value={this.state.newFirstName}  onChange={this.changeFirstNameValue} placeholder="imie"/>
 					<label>Nazwisko</label>
-					<input type="text" value={this.state.newLasttName} onChange={this.changeLastNameValue} placeholder="nazwisko"/>
+					<input type="text" value={this.state.newLastName} onChange={this.changeLastNameValue} placeholder="nazwisko"/>
 					<label>Email</label>
 					<input type="email" value={this.state.newEmail} onChange={this.changeEmailValue} placeholder="email"/>
 					<button type="submit">dodaj kontakt</button>
