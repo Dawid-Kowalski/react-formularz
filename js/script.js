@@ -9,6 +9,7 @@ class Title extends React.Component {
 	}
 }
 
+
 class ContactForm extends React.Component {
 	render() {
 		return (
@@ -25,7 +26,55 @@ class ContactForm extends React.Component {
 			</div>
 		)
 	}
-} 
+}
+
+class ContactList extends React.Component {
+
+	contacts = [
+		  {
+		    id: 1,
+		    firstName: 'Jan',
+		    lastName: 'Nowak',
+		    email: 'jan.nowak@example.com',
+		  },
+		  {
+		    id: 2,
+		    firstName: 'Adam',
+		    lastName: 'Kowalski',
+		    email: 'adam.kowalski@example.com',
+		  },
+		  {
+		    id: 3,
+		    firstName: 'Zbigniew',
+		    lastName: 'Koziol',
+		    email: 'zbigniew.koziol@example.com',
+		  }
+		]
+
+	render() {
+		return (
+			<div>
+				<Contact contacts={this.contacts} />
+			</div>
+		)
+	}
+}
+
+class Contact extends React.Component {
+	render() {
+		return (
+			<div>
+				{this.props.contacts.map( contact => 
+					<div>
+						<p>{contact.firstName}</p>
+						<p>{contact.lastName}</p>
+						<p>{contact.email}</p>
+					</div>
+				)}
+			</div>
+		)
+	}
+}
 
 class App extends React.Component {
 
@@ -34,6 +83,7 @@ class App extends React.Component {
 			<div>
 				<Title title = 'Formularz'/>
 				<ContactForm />
+				<ContactList />
 			</div>
 		)
 	}
